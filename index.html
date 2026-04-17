@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atiq Halal Food</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#1a6b3c;--green2:#228b4e;--green3:#e8f5ee;
+  --gold:#d4920a;--gold2:#fdf4e3;
+  --ink:#1c1c1e;--ink2:#4a4a4a;--ink3:#8a8a8a;
+  --border:#e8e8e8;--bg:#f7f7f5;--white:#fff;
+  --red:#d0312d;--blue:#1a5fa6;
+  --radius:10px;--shadow:0 2px 14px rgba(0,0,0,.07);--shadow2:0 6px 28px rgba(0,0,0,.12);
+}
+html{scroll-behavior:smooth;font-size:15px}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+body.lang-bn{font-family:'Noto Sans Bengali',sans-serif}
+body.lang-ko{font-family:'Noto Sans KR',sans-serif}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#f1f1f1}::-webkit-scrollbar-thumb{background:#c0c0c0;border-radius:3px}
+
+/* ─── TOP BAR ─── */
+.topbar{background:var(--green);color:rgba(255,255,255,.85);font-size:.72rem;letter-spacing:.04em;text-align:center;padding:.35rem 1rem}
+
+/* ─── HEADER ─── */
+header{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:300;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.header-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:1rem;padding:.75rem 1.5rem;height:66px}
+.logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;flex-shrink:0}
+.logo-mark{width:42px;height:42px;background:var(--green);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.logo-name{font-size:1.1rem;font-weight:700;color:var(--ink);line-height:1.15}
+.logo-sub{font-size:.65rem;color:var(--ink3);letter-spacing:.06em;text-transform:uppercase}
+.header-search{flex:1;max-width:420px;margin:0 auto;position:relative}
+.header-search input{width:100%;border:1.5px solid var(--border);border-radius:24px;padding:.5rem 1.1rem .5rem 2.6rem;font-size:.85rem;font-family:inherit;outline:none;background:#fafafa;transition:border-color .2s}
+.header-search input:focus{border-color:var(--green);background:var(--white)}
+.search-icon{position:absolute;left:.85rem;top:50%;transform:translateY(-50%);color:var(--ink3);font-size:.9rem;pointer-events:none}
+.header-right{display:flex;align-items:center;gap:.6rem;margin-left:auto;flex-shrink:0}
+
+/* LANGUAGE SWITCHER */
+.lang-switcher{display:flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden}
+.lang-btn{background:none;border:none;padding:.3rem .6rem;font-size:.72rem;font-weight:600;cursor:pointer;color:var(--ink3);transition:all .2s;font-family:inherit}
+.lang-btn.active{background:var(--green);color:var(--white)}
+.lang-btn:not(:last-child){border-right:1px solid var(--border)}
+
+/* CART ICON BTN */
+.cart-icon-btn{position:relative;background:none;border:1.5px solid var(--border);border-radius:10px;padding:.4rem .75rem;cursor:pointer;display:flex;align-items:center;gap:.4rem;font-size:.82rem;font-weight:600;color:var(--ink2);transition:all .2s;font-family:inherit}
+.cart-icon-btn:hover{border-color:var(--green);color:var(--green)}
+.cart-badge{position:absolute;top:-7px;right:-7px;background:var(--red);color:var(--white);border-radius:50%;width:18px;height:18px;font-size:.65rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.cart-badge.hidden{display:none}
+
+/* ─── HERO ─── */
+.hero{background:linear-gradient(130deg,var(--green) 0%,#2e8b57 60%,#3cb371 100%);color:var(--white);padding:3.5rem 1.5rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-60px;right:-80px;width:340px;height:340px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero::after{content:'';position:absolute;bottom:-80px;left:-50px;width:250px;height:250px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero-inner{max-width:680px;margin:0 auto;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:.3rem .9rem;font-size:.75rem;letter-spacing:.06em;margin-bottom:1rem}
+.hero h1{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.2;margin-bottom:.6rem}
+.hero p{font-size:.95rem;opacity:.85;margin-bottom:1.5rem}
+.hero-tags{display:flex;justify-content:center;flex-wrap:wrap;gap:.5rem}
+.hero-tag{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:.25rem .75rem;font-size:.75rem}
+
+/* ─── NOTICE BANNER ─── */
+.notice{background:var(--gold2);border-bottom:1px solid #f0d080;padding:.6rem 1.5rem;text-align:center;font-size:.8rem;color:#7a5c0a}
+
+/* ─── MAIN LAYOUT ─── */
+.page-wrap{max-width:1240px;margin:0 auto;padding:1.5rem;display:grid;grid-template-columns:1fr 320px;gap:1.5rem;align-items:start}
+
+/* ─── CATEGORY TABS ─── */
+.cat-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.cat-tab{background:var(--white);border:1.5px solid var(--border);border-radius:22px;padding:.35rem 1rem;font-size:.8rem;font-weight:500;cursor:pointer;color:var(--ink2);transition:all .2s;font-family:inherit;display:flex;align-items:center;gap:.35rem}
+.cat-tab:hover{border-color:var(--green);color:var(--green)}
+.cat-tab.active{background:var(--green);border-color:var(--green);color:var(--white)}
+.cat-tab span.emoji{font-size:.9rem}
+
+/* ─── SECTION HEADING ─── */
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.section-head h2{font-size:1.05rem;font-weight:700;color:var(--ink)}
+.item-count{font-size:.78rem;color:var(--ink3)}
+
+/* ─── PRODUCT GRID ─── */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:1rem}
+.product-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:box-shadow .2s,transform .2s;cursor:default}
+.product-card:hover{box-shadow:var(--shadow2);transform:translateY(-2px)}
+.p-img{height:118px;display:flex;align-items:center;justify-content:center;font-size:2.8rem;background:var(--green3);position:relative}
+.halal-stamp{position:absolute;top:6px;right:6px;background:var(--green);color:var(--white);font-size:.58rem;font-weight:700;padding:.15rem .45rem;border-radius:4px;letter-spacing:.04em}
+.p-body{padding:.75rem .8rem .8rem}
+.p-name{font-weight:600;font-size:.84rem;color:var(--ink);line-height:1.35;margin-bottom:.2rem}
+.p-desc{font-size:.72rem;color:var(--ink3);line-height:1.4;margin-bottom:.55rem;min-height:2rem}
+.p-footer{display:flex;align-items:center;justify-content:space-between;gap:.4rem}
+.p-price{font-weight:700;font-size:.95rem;color:var(--green);white-space:nowrap}
+.p-unit{font-size:.65rem;color:var(--ink3);font-weight:400}
+.add-btn{background:var(--green);color:var(--white);border:none;border-radius:7px;width:30px;height:30px;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;font-family:inherit}
+.add-btn:hover{background:var(--green2)}
+.qty-ctrl{display:flex;align-items:center;gap:.3rem}
+.q-btn{background:var(--green3);color:var(--green);border:1.5px solid var(--green);border-radius:6px;width:26px;height:26px;font-size:.9rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;font-family:inherit}
+.q-btn:hover{background:var(--green);color:var(--white)}
+.q-num{font-size:.85rem;font-weight:700;min-width:18px;text-align:center;color:var(--ink)}
+
+/* ─── CART PANEL ─── */
+.cart-panel{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;position:sticky;top:82px;box-shadow:var(--shadow)}
+.cart-head{background:var(--green);color:var(--white);padding:.9rem 1.1rem;display:flex;align-items:center;justify-content:space-between}
+.cart-head h3{font-size:1rem;font-weight:600}
+.cart-head-count{font-size:.75rem;opacity:.8}
+.cart-body{padding:1rem 1.1rem}
+.cart-empty-state{text-align:center;padding:2rem .5rem;color:var(--ink3)}
+.cart-empty-icon{font-size:2.5rem;opacity:.35;margin-bottom:.5rem}
+.cart-empty-txt{font-size:.82rem}
+.cart-list{display:flex;flex-direction:column;gap:0}
+.cart-row{display:grid;grid-template-columns:1fr auto;gap:.2rem .6rem;padding:.7rem 0;border-bottom:1px solid var(--border);align-items:start}
+.cart-row:last-child{border-bottom:none}
+.cr-name{font-size:.83rem;font-weight:600;color:var(--ink);line-height:1.3}
+.cr-meta{font-size:.72rem;color:var(--ink3)}
+.cr-price{font-size:.88rem;font-weight:700;color:var(--green);text-align:right;white-space:nowrap}
+.cr-remove{background:none;border:none;color:var(--ink3);font-size:.68rem;cursor:pointer;text-align:right;padding:0;text-decoration:underline;font-family:inherit}
+.cr-remove:hover{color:var(--red)}
+.cart-divider{height:1px;background:var(--border);margin:.75rem 0}
+.cart-subtotal{display:flex;justify-content:space-between;font-size:.82rem;color:var(--ink2);margin-bottom:.3rem}
+.cart-delivery{display:flex;justify-content:space-between;font-size:.78rem;color:var(--ink3);margin-bottom:.5rem}
+.cart-total-row{background:var(--green3);border-radius:8px;padding:.65rem .85rem;display:flex;justify-content:space-between;align-items:center;margin-bottom:.9rem}
+.cart-total-label{font-size:.85rem;font-weight:600;color:var(--green)}
+.cart-total-amount{font-size:1.2rem;font-weight:700;color:var(--green)}
+.checkout-btn{width:100%;background:var(--gold);color:var(--white);border:none;border-radius:9px;padding:.75rem;font-size:.9rem;font-weight:600;cursor:pointer;transition:background .2s;font-family:inherit}
+.checkout-btn:hover{background:#c0830a}
+.checkout-btn:disabled{background:#ccc;cursor:not-allowed}
+.clear-btn{width:100%;margin-top:.5rem;background:none;border:1.5px solid var(--border);border-radius:9px;padding:.5rem;font-size:.78rem;color:var(--ink3);cursor:pointer;transition:all .2s;font-family:inherit}
+.clear-btn:hover{border-color:var(--red);color:var(--red)}
+
+/* ─── CHECKOUT PAGE ─── */
+.page-checkout{display:none;max-width:800px;margin:0 auto;padding:1.5rem}
+.page-checkout.show{display:block}
+.page-receipt{display:none;max-width:680px;margin:0 auto;padding:1.5rem}
+.page-receipt.show{display:block}
+
+.back-btn{background:none;border:1.5px solid var(--border);border-radius:8px;padding:.42rem 1rem;font-size:.82rem;font-weight:500;cursor:pointer;color:var(--ink2);margin-bottom:1.2rem;display:inline-flex;align-items:center;gap:.4rem;transition:all .2s;font-family:inherit}
+.back-btn:hover{border-color:var(--green);color:var(--green)}
+.form-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.8rem;box-shadow:var(--shadow)}
+.form-card h2{font-size:1.2rem;font-weight:700;color:var(--green);margin-bottom:.4rem}
+.form-card .sub{font-size:.8rem;color:var(--ink3);margin-bottom:1.4rem}
+.order-mini{background:var(--green3);border-radius:10px;padding:.9rem 1.1rem;margin-bottom:1.4rem;font-size:.82rem}
+.order-mini-title{font-weight:700;color:var(--green);margin-bottom:.4rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}
+.order-mini-item{display:flex;justify-content:space-between;color:var(--ink2);padding:.12rem 0}
+.order-mini-total{display:flex;justify-content:space-between;font-weight:700;color:var(--green);margin-top:.5rem;padding-top:.5rem;border-top:1px solid rgba(26,107,60,.2)}
+.alert-box{background:var(--gold2);border:1px solid #e8cc70;border-radius:9px;padding:.8rem 1rem;font-size:.78rem;color:#7a5010;margin-bottom:1.2rem;line-height:1.55}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-grp{display:flex;flex-direction:column;gap:.3rem;margin-bottom:1rem}
+.form-grp label{font-size:.78rem;font-weight:600;color:var(--ink2)}
+.form-grp input,.form-grp textarea,.form-grp select{border:1.5px solid var(--border);border-radius:8px;padding:.58rem .85rem;font-size:.88rem;font-family:inherit;color:var(--ink);background:var(--white);transition:border-color .2s;outline:none}
+.form-grp input:focus,.form-grp textarea:focus{border-color:var(--green)}
+.form-grp textarea{resize:vertical;min-height:80px}
+.generate-btn{width:100%;background:var(--green);color:var(--white);border:none;border-radius:10px;padding:.85rem;font-size:.95rem;font-weight:700;cursor:pointer;transition:background .2s;font-family:inherit;letter-spacing:.02em}
+.generate-btn:hover{background:var(--green2)}
+
+/* ─── RECEIPT ─── */
+.receipt-actions{display:flex;gap:.7rem;margin-bottom:1.2rem}
+.r-print-btn{flex:1;background:var(--green);color:var(--white);border:none;border-radius:9px;padding:.7rem;font-size:.88rem;font-weight:600;cursor:pointer;font-family:inherit}
+.r-print-btn:hover{background:var(--green2)}
+.r-new-btn{flex:1;background:var(--white);border:1.5px solid var(--border);border-radius:9px;padding:.7rem;font-size:.88rem;font-weight:500;cursor:pointer;font-family:inherit;color:var(--ink2)}
+.r-new-btn:hover{border-color:var(--green);color:var(--green)}
+.receipt-card{background:var(--white);border:2px solid var(--green);border-radius:16px;overflow:hidden;box-shadow:var(--shadow2)}
+.rc-header{background:var(--green);color:var(--white);padding:1.5rem;text-align:center}
+.rc-header-icon{font-size:2rem;margin-bottom:.4rem}
+.rc-header h2{font-family:'Poppins',sans-serif;font-size:1.35rem;font-weight:700}
+.rc-header p{font-size:.78rem;opacity:.75}
+.rc-order-id{font-size:.8rem;opacity:.85;margin-top:.5rem;letter-spacing:.04em}
+.rc-body{padding:1.4rem 1.6rem}
+.rc-label{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:.45rem;margin-top:1.1rem}
+.rc-label:first-child{margin-top:0}
+.rc-info{display:grid;grid-template-columns:1fr 1fr;gap:.3rem .8rem;background:var(--bg);border-radius:9px;padding:.75rem 1rem;margin-bottom:.3rem}
+.rc-info-item{}
+.rc-info-item span{display:block;font-size:.7rem;color:var(--ink3)}
+.rc-info-item strong{font-size:.85rem;color:var(--ink)}
+.rc-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.rc-table thead tr{background:var(--green3)}
+.rc-table th{padding:.5rem .6rem;text-align:left;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--green)}
+.rc-table th:last-child,.rc-table td:last-child{text-align:right}
+.rc-table td{padding:.5rem .6rem;border-bottom:1px solid var(--border)}
+.rc-table tbody tr:last-child td{border-bottom:none}
+.rc-total-row{display:flex;justify-content:space-between;align-items:center;background:var(--green);color:var(--white);padding:.8rem .7rem;border-radius:9px;margin-top:.5rem}
+.rc-total-row span:first-child{font-size:.9rem;font-weight:600}
+.rc-total-row span:last-child{font-size:1.25rem;font-weight:700}
+.bank-card{background:var(--gold2);border:1.5px solid #ecc96e;border-radius:10px;padding:1rem 1.1rem;margin-top:.4rem}
+.bank-title{font-weight:700;font-size:.78rem;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem;display:flex;align-items:center;gap:.35rem}
+.bank-row{display:flex;justify-content:space-between;font-size:.83rem;padding:.18rem 0}
+.bank-row span:first-child{color:var(--ink3)}
+.bank-row span:last-child{font-weight:600;color:var(--ink)}
+.bank-row.highlight span:last-child{color:var(--gold);font-size:.95rem}
+.send-note{background:#fff8ef;border:1px solid #f5d99e;border-radius:9px;padding:.7rem .9rem;font-size:.78rem;color:#7a5010;margin-top:.75rem;text-align:center;line-height:1.55}
+.rc-footer{background:var(--green3);padding:.9rem 1.6rem;text-align:center;font-size:.75rem;color:var(--green);border-top:1px solid #c5e5d5}
+
+/* ─── FOOTER ─── */
+.site-footer{background:var(--green);color:rgba(255,255,255,.75);text-align:center;padding:2rem 1.5rem;font-size:.78rem;margin-top:3rem}
+.site-footer strong{color:var(--white)}
+
+/* HIDDEN */
+.hidden{display:none!important}
+
+/* PRINT */
+@media print{
+  header,.topbar,.notice,.hero,.page-wrap,.page-checkout,.receipt-actions,.site-footer{display:none!important}
+  .page-receipt{display:block!important;padding:0!important;max-width:100%}
+  .receipt-card{border:2px solid #1a6b3c;box-shadow:none}
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .page-wrap{grid-template-columns:1fr}
+  .cart-panel{position:static}
+}
+@media(max-width:580px){
+  .form-grid{grid-template-columns:1fr}
+  .header-search{display:none}
+  .hero h1{font-size:1.5rem}
+  .rc-info{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body class="lang-en" id="body">
+
+<!-- TOP BAR -->
+<div class="topbar" id="topbar">☪ 100% Halal Certified &nbsp;|&nbsp; Fresh Homemade Food &nbsp;|&nbsp; Fast Delivery in Korea</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo" onclick="goHome();return false">
+      <div class="logo-mark">🌙</div>
+      <div>
+        <div class="logo-name">Atiq Halal Food</div>
+        <div class="logo-sub" id="logo-sub">Authentic · Halal · Fresh</div>
+      </div>
+    </a>
+    <div class="header-search">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-input" placeholder="Search products…" oninput="searchProducts(this.value)">
+    </div>
+    <div class="header-right">
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('en')" id="lb-en">EN</button>
+        <button class="lang-btn" onclick="setLang('bn')" id="lb-bn">বাং</button>
+        <button class="lang-btn" onclick="setLang('ko')" id="lb-ko">한</button>
+      </div>
+      <button class="cart-icon-btn" onclick="scrollToCart()">
+        🛒 <span id="hdr-cart-txt">Cart</span>
+        <span class="cart-badge hidden" id="hdr-badge">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero" id="hero-section">
+  <div class="hero-inner">
+    <div class="hero-badge">☪ <span id="hero-badge-txt">Certified Halal</span></div>
+    <h1 id="hero-title">Fresh Halal Food,<br>Delivered to Your Door</h1>
+    <p id="hero-sub">Browse our full menu, add items to cart, and we'll deliver fresh homemade halal food straight to you.</p>
+    <div class="hero-tags">
+      <span class="hero-tag" id="ht1">🍖 100% Halal Meat</span>
+      <span class="hero-tag" id="ht2">🏠 Home Cooked</span>
+      <span class="hero-tag" id="ht3">🚚 Same-Day Delivery</span>
+      <span class="hero-tag" id="ht4">📱 Easy Payment</span>
+    </div>
+  </div>
+</div>
+
+<!-- NOTICE -->
+<div class="notice" id="notice-bar">
+  📢 <span id="notice-txt">Orders placed before 12pm are delivered the same day. For inquiries, contact us on KakaoTalk: <strong>atiqhalalfood</strong></span>
+</div>
+
+<!-- SHOP PAGE -->
+<div id="shop-page">
+  <div class="page-wrap">
+    <!-- Products -->
+    <div>
+      <div class="cat-tabs" id="cat-tabs"></div>
+      <div class="section-head">
+        <h2 id="cat-heading">All Items</h2>
+        <span class="item-count" id="item-count"></span>
+      </div>
+      <div class="product-grid" id="product-grid"></div>
+    </div>
+    <!-- Cart -->
+    <div class="cart-panel" id="cart-panel">
+      <div class="cart-head">
+        <h3 id="cart-title">🛒 Your Order</h3>
+        <span class="cart-head-count" id="cart-count-label">0 items</span>
+      </div>
+      <div class="cart-body" id="cart-body"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKOUT PAGE -->
+<div class="page-checkout" id="checkout-page">
+  <button class="back-btn" onclick="backToShop()">← <span data-t="back_shop">Back to Menu</span></button>
+  <div class="form-card">
+    <h2 data-t="checkout_title">Complete Your Order</h2>
+    <p class="sub" data-t="checkout_sub">Fill in your details to generate a payment receipt</p>
+    <div class="order-mini" id="order-mini-summary"></div>
+    <div class="alert-box" id="alert-box"></div>
+    <div class="form-grid">
+      <div class="form-grp">
+        <label data-t="label_name">Full Name *</label>
+        <input type="text" id="f-name" placeholder="Your full name">
+      </div>
+      <div class="form-grp">
+        <label data-t="label_phone">Mobile Number *</label>
+        <input type="tel" id="f-phone" placeholder="010-XXXX-XXXX">
+      </div>
+    </div>
+    <div class="form-grp">
+      <label data-t="label_address">Delivery Address *</label>
+      <textarea id="f-address" placeholder="Full address with dong / street / apartment number"></textarea>
+    </div>
+    <div class="form-grp">
+      <label data-t="label_note">Special Notes (optional)</label>
+      <input type="text" id="f-note" placeholder="Allergies, spice level, timing preferences…">
+    </div>
+    <button class="generate-btn" onclick="generateReceipt()" data-t="generate_btn">✅ Generate Receipt & View Bank Details</button>
+  </div>
+</div>
+
+<!-- RECEIPT PAGE -->
+<div class="page-receipt" id="receipt-page">
+  <div class="receipt-actions">
+    <button class="r-print-btn" onclick="window.print()">🖨️ <span data-t="print_btn">Print / Save PDF</span></button>
+    <button class="r-new-btn" onclick="newOrder()">🛒 <span data-t="new_order_btn">New Order</span></button>
+  </div>
+  <div class="receipt-card" id="receipt-card">
+    <div class="rc-header">
+      <div class="rc-header-icon">🌙</div>
+      <h2>Atiq Halal Food</h2>
+      <p data-t="receipt_header_sub">Order Receipt / 주문 영수증 / অর্ডার রসিদ</p>
+      <div class="rc-order-id" id="r-order-id"></div>
+    </div>
+    <div class="rc-body">
+      <div class="rc-label" data-t="rc_customer">Customer Details</div>
+      <div class="rc-info" id="r-customer"></div>
+      <div class="rc-label" data-t="rc_order">Order Summary</div>
+      <table class="rc-table"><thead><tr>
+        <th data-t="th_item">Item</th><th data-t="th_qty">Qty</th><th data-t="th_unit">Unit</th><th data-t="th_sub">Subtotal</th>
+      </tr></thead><tbody id="r-items"></tbody></table>
+      <div class="rc-total-row"><span data-t="total_label">Total to Pay</span><span id="r-total"></span></div>
+      <div class="rc-label" data-t="rc_payment">Payment Details</div>
+      <div class="bank-card">
+        <div class="bank-title">🏦 <span data-t="bank_title">Transfer Payment To</span></div>
+        <div class="bank-row"><span data-t="bank_name_label">Account Name</span><span>Atiq Halal Food</span></div>
+        <div class="bank-row"><span data-t="bank_label">Bank</span><span>KakaoBank</span></div>
+        <div class="bank-row"><span data-t="bank_num_label">Account Number</span><span>3333-XX-XXXXXXX</span></div>
+        <div class="bank-row highlight"><span data-t="bank_amount_label">Amount to Transfer</span><span id="r-bank-amt"></span></div>
+      </div>
+      <div class="send-note" id="send-note"></div>
+    </div>
+    <div class="rc-footer" id="rc-footer"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer" id="site-footer">
+  <strong>Atiq Halal Food</strong><br>
+  <span id="footer-txt">☪ All food is fresh, homemade, and 100% Halal certified · Daegu, South Korea</span>
+</footer>
+
+<script>
+// ════════════════════════════════════════════════
+// TRANSLATIONS
+// ════════════════════════════════════════════════
+const T = {
+  en:{
+    topbar:"☪ 100% Halal Certified | Fresh Homemade Food | Fast Delivery in Korea",
+    logo_sub:"Authentic · Halal · Fresh",
+    hero_badge:"Certified Halal",
+    hero_title:"Fresh Halal Food,<br>Delivered to Your Door",
+    hero_sub:"Browse our full menu, add items to cart, and we'll deliver fresh homemade halal food straight to you.",
+    ht1:"🍖 100% Halal Meat",ht2:"🏠 Home Cooked",ht3:"🚚 Same-Day Delivery",ht4:"📱 Easy Payment",
+    notice_txt:"Orders placed before 12pm are delivered the same day. For inquiries, contact us on KakaoTalk: <strong>atiqhalalfood</strong>",
+    hdr_cart:"Cart",
+    cat_all:"All",
+    cat_heading:"All Items",
+    item_count_fn:(n)=>`${n} item${n!==1?'s':''}`,
+    cart_title:"🛒 Your Order",
+    cart_empty_txt:"Add items from the menu!",
+    cart_items_label:(n)=>`${n} item${n!==1?'s':''}`,
+    subtotal:"Subtotal",delivery:"Delivery",free:"Free",
+    total_label_cart:"Total",
+    checkout_btn:"Proceed to Checkout →",
+    clear_cart:"Clear cart",
+    remove:"remove",
+    back_shop:"Back to Menu",
+    checkout_title:"Complete Your Order",
+    checkout_sub:"Fill in your details to generate a payment receipt",
+    label_name:"Full Name *",label_phone:"Mobile Number *",label_address:"Delivery Address *",label_note:"Special Notes (optional)",
+    ph_name:"Your full name",ph_phone:"010-XXXX-XXXX",ph_address:"Full address with dong / street / apartment",ph_note:"Allergies, spice level, timing…",
+    alert_txt:"After submitting, a receipt will be generated showing the total and bank details. Please transfer the exact amount and send us a payment screenshot via KakaoTalk.",
+    generate_btn:"✅ Generate Receipt & View Bank Details",
+    order_items:"Items",
+    rc_customer:"Customer Details",rc_order:"Order Summary",rc_payment:"Payment Details",
+    rc_name:"Name",rc_phone:"Phone",rc_address:"Delivery Address",rc_notes:"Notes",
+    th_item:"Item",th_qty:"Qty",th_unit:"Unit Price",th_sub:"Subtotal",
+    total_label:"Total to Pay",
+    bank_title:"Transfer Payment To",
+    bank_name_label:"Account Name",bank_label:"Bank",bank_num_label:"Account Number",bank_amount_label:"Amount to Transfer",
+    send_note:"📱 After transferring, send a screenshot to <strong>010-XXXX-XXXX</strong> on KakaoTalk / WhatsApp to confirm your order.",
+    print_btn:"Print / Save PDF",new_order_btn:"New Order",
+    receipt_header_sub:"Order Receipt",
+    rc_footer:"Thank you! Your fresh halal food is being prepared. Estimated delivery: 1–2 hours. ☪ Halal · Homemade · Trusted",
+    footer_txt:"☪ All food is fresh, homemade, and 100% Halal certified · Daegu, South Korea",
+    search_ph:"Search products…",
+    err_fill:"Please fill in your name, phone number, and delivery address.",
+    halal:"HALAL",
+  },
+  bn:{
+    topbar:"☪ ১০০% হালাল সার্টিফাইড | তাজা ঘরে তৈরি খাবার | দ্রুত ডেলিভারি",
+    logo_sub:"খাঁটি · হালাল · তাজা",
+    hero_badge:"হালাল সার্টিফাইড",
+    hero_title:"তাজা হালাল খাবার,<br>আপনার দোরগোড়ায় পৌঁছে দিই",
+    hero_sub:"আমাদের মেনু দেখুন, কার্টে পণ্য যোগ করুন, এবং তাজা ঘরে তৈরি হালাল খাবার সরাসরি আপনার কাছে পাঠাব।",
+    ht1:"🍖 ১০০% হালাল মাংস",ht2:"🏠 ঘরে রান্না",ht3:"🚚 একই দিনে ডেলিভারি",ht4:"📱 সহজ পেমেন্ট",
+    notice_txt:"দুপুর ১২টার আগে অর্ডার করলে একই দিনে ডেলিভারি হবে। যোগাযোগ: কাকাওটক <strong>atiqhalalfood</strong>",
+    hdr_cart:"কার্ট",
+    cat_all:"সব",
+    cat_heading:"সব পণ্য",
+    item_count_fn:(n)=>`${n}টি পণ্য`,
+    cart_title:"🛒 আপনার অর্ডার",
+    cart_empty_txt:"মেনু থেকে পণ্য যোগ করুন!",
+    cart_items_label:(n)=>`${n}টি পণ্য`,
+    subtotal:"মোট",delivery:"ডেলিভারি",free:"বিনামূল্যে",
+    total_label_cart:"সর্বমোট",
+    checkout_btn:"অর্ডার নিশ্চিত করুন →",
+    clear_cart:"কার্ট খালি করুন",
+    remove:"সরান",
+    back_shop:"মেনুতে ফিরুন",
+    checkout_title:"অর্ডার সম্পূর্ণ করুন",
+    checkout_sub:"পেমেন্ট রসিদ তৈরি করতে আপনার তথ্য দিন",
+    label_name:"পুরো নাম *",label_phone:"মোবাইল নম্বর *",label_address:"ডেলিভারি ঠিকানা *",label_note:"বিশেষ নির্দেশনা (ঐচ্ছিক)",
+    ph_name:"আপনার পুরো নাম",ph_phone:"010-XXXX-XXXX",ph_address:"পুরো ঠিকানা লিখুন",ph_note:"অ্যালার্জি, ঝাল কম/বেশি, সময়...",
+    alert_txt:"অর্ডার দেওয়ার পর একটি রসিদ তৈরি হবে যাতে মোট পরিমাণ ও ব্যাংক তথ্য থাকবে। সঠিক পরিমাণ ট্রান্সফার করে কাকাওটকে স্ক্রিনশট পাঠান।",
+    generate_btn:"✅ রসিদ তৈরি করুন ও পেমেন্ট তথ্য দেখুন",
+    order_items:"পণ্যসমূহ",
+    rc_customer:"গ্রাহকের তথ্য",rc_order:"অর্ডার সারসংক্ষেপ",rc_payment:"পেমেন্ট তথ্য",
+    rc_name:"নাম",rc_phone:"ফোন",rc_address:"ডেলিভারি ঠিকানা",rc_notes:"নোট",
+    th_item:"পণ্য",th_qty:"পরিমাণ",th_unit:"একক মূল্য",th_sub:"মোট",
+    total_label:"পরিশোধযোগ্য মোট",
+    bank_title:"এই অ্যাকাউন্টে পাঠান",
+    bank_name_label:"অ্যাকাউন্টের নাম",bank_label:"ব্যাংক",bank_num_label:"অ্যাকাউন্ট নম্বর",bank_amount_label:"ট্রান্সফার করুন",
+    send_note:"📱 ট্রান্সফারের পর কাকাওটক / হোয়াটসঅ্যাপে <strong>010-XXXX-XXXX</strong> নম্বরে স্ক্রিনশট পাঠান।",
+    print_btn:"প্রিন্ট / PDF সেভ করুন",new_order_btn:"নতুন অর্ডার",
+    receipt_header_sub:"অর্ডার রসিদ",
+    rc_footer:"ধন্যবাদ! আপনার তাজা হালাল খাবার প্রস্তুত হচ্ছে। আনুমানিক ডেলিভারি: ১–২ ঘণ্টা। ☪ হালাল · ঘরে তৈরি · বিশ্বস্ত",
+    footer_txt:"☪ সব খাবার তাজা, ঘরে তৈরি এবং ১০০% হালাল সার্টিফাইড · দাইগু, দক্ষিণ কোরিয়া",
+    search_ph:"পণ্য খুঁজুন…",
+    err_fill:"অনুগ্রহ করে নাম, মোবাইল নম্বর এবং ডেলিভারি ঠিকানা দিন।",
+    halal:"হালাল",
+  },
+  ko:{
+    topbar:"☪ 100% 할랄 인증 | 신선한 가정식 | 한국 내 빠른 배달",
+    logo_sub:"정통 · 할랄 · 신선",
+    hero_badge:"할랄 인증",
+    hero_title:"신선한 할랄 음식을<br>문 앞까지 배달해드립니다",
+    hero_sub:"메뉴를 둘러보고 장바구니에 담으세요. 신선한 가정식 할랄 음식을 바로 배달해드립니다.",
+    ht1:"🍖 100% 할랄 육류",ht2:"🏠 가정식",ht3:"🚚 당일 배달",ht4:"📱 간편 결제",
+    notice_txt:"오전 12시 이전 주문은 당일 배달됩니다. 문의: 카카오톡 <strong>atiqhalalfood</strong>",
+    hdr_cart:"장바구니",
+    cat_all:"전체",
+    cat_heading:"전체 메뉴",
+    item_count_fn:(n)=>`${n}개 상품`,
+    cart_title:"🛒 주문 목록",
+    cart_empty_txt:"메뉴에서 상품을 담아주세요!",
+    cart_items_label:(n)=>`${n}개`,
+    subtotal:"소계",delivery:"배달비",free:"무료",
+    total_label_cart:"합계",
+    checkout_btn:"주문하기 →",
+    clear_cart:"장바구니 비우기",
+    remove:"삭제",
+    back_shop:"메뉴로 돌아가기",
+    checkout_title:"주문 완료하기",
+    checkout_sub:"결제 영수증을 생성하려면 정보를 입력하세요",
+    label_name:"이름 *",label_phone:"휴대폰 번호 *",label_address:"배달 주소 *",label_note:"특별 요청 사항 (선택)",
+    ph_name:"성함을 입력하세요",ph_phone:"010-XXXX-XXXX",ph_address:"동/거리/아파트 포함 전체 주소",ph_note:"알레르기, 맵기 조절, 시간 등",
+    alert_txt:"주문 후 총액 및 계좌 정보가 포함된 영수증이 생성됩니다. 정확한 금액을 이체하신 후 카카오톡으로 입금 스크린샷을 보내주세요.",
+    generate_btn:"✅ 영수증 생성 및 계좌 정보 확인",
+    order_items:"주문 상품",
+    rc_customer:"고객 정보",rc_order:"주문 내역",rc_payment:"결제 정보",
+    rc_name:"이름",rc_phone:"전화번호",rc_address:"배달 주소",rc_notes:"요청 사항",
+    th_item:"상품",th_qty:"수량",th_unit:"단가",th_sub:"소계",
+    total_label:"총 결제 금액",
+    bank_title:"이 계좌로 이체해주세요",
+    bank_name_label:"예금주",bank_label:"은행",bank_num_label:"계좌번호",bank_amount_label:"이체 금액",
+    send_note:"📱 입금 후 카카오톡 / 카카오페이로 <strong>010-XXXX-XXXX</strong>에 입금 스크린샷을 보내주세요.",
+    print_btn:"인쇄 / PDF 저장",new_order_btn:"새 주문",
+    receipt_header_sub:"주문 영수증",
+    rc_footer:"감사합니다! 신선한 할랄 음식을 준비 중입니다. 예상 배달 시간: 1–2시간. ☪ 할랄 · 가정식 · 믿을 수 있는",
+    footer_txt:"☪ 모든 음식은 신선하고 가정에서 조리되며 100% 할랄 인증을 받았습니다 · 대구, 한국",
+    search_ph:"상품 검색…",
+    err_fill:"이름, 휴대폰 번호, 배달 주소를 입력해주세요.",
+    halal:"할랄",
+  }
+};
+
+// ════════════════════════════════════════════════
+// PRODUCTS (owner edits this section)
+// ════════════════════════════════════════════════
+const products = [
+  // Rice & Biryani
+  {id:1,emoji:"🍚",cat:"rice",price:12000,en:{name:"Chicken Biryani",desc:"Fragrant basmati with spiced chicken"},bn:{name:"চিকেন বিরিয়ানি",desc:"মশলাদার মুরগি দিয়ে বাসমতি ভাত"},ko:{name:"치킨 비리야니",desc:"향긋한 바스마티와 닭고기"}},
+  {id:2,emoji:"🍲",cat:"rice",price:13000,en:{name:"Beef Biryani",desc:"Slow-cooked beef with aromatic spices"},bn:{name:"গরুর বিরিয়ানি",desc:"ধীর রান্না করা গরুর মাংসের বিরিয়ানি"},ko:{name:"소고기 비리야니",desc:"향신료로 천천히 조린 소고기"}},
+  {id:3,emoji:"🌾",cat:"rice",price:10000,en:{name:"Vegetable Biryani",desc:"Mixed vegetables in spiced basmati"},bn:{name:"সবজি বিরিয়ানি",desc:"মিশ্র সবজি দিয়ে বাসমতি ভাত"},ko:{name:"야채 비리야니",desc:"다양한 채소가 들어간 바스마티"}},
+  // Curry
+  {id:4,emoji:"🍛",cat:"curry",price:11000,en:{name:"Chicken Curry",desc:"Rich tomato-based curry, served with rice"},bn:{name:"চিকেন কারি",desc:"টমেটো দিয়ে মশলাদার চিকেন কারি"},ko:{name:"치킨 커리",desc:"토마토 베이스의 풍부한 카레"}},
+  {id:5,emoji:"🫕",cat:"curry",price:14000,en:{name:"Lamb Curry",desc:"Tender lamb in traditional spices"},bn:{name:"মাটন কারি",desc:"ঐতিহ্যবাহী মশলায় নরম মাটন"},ko:{name:"양고기 커리",desc:"전통 향신료로 만든 부드러운 양고기"}},
+  {id:6,emoji:"🫘",cat:"curry",price:8000,en:{name:"Dal Curry",desc:"Hearty lentil curry, vegan-friendly"},bn:{name:"ডাল কারি",desc:"পুষ্টিকর মসুর ডালের তরকারি"},ko:{name:"달 커리",desc:"든든한 렌틸 콩 카레"}},
+  {id:7,emoji:"🦐",cat:"curry",price:15000,en:{name:"Prawn Curry",desc:"Juicy prawns in coconut-spiced sauce"},bn:{name:"চিংড়ি কারি",desc:"নারকেল মশলায় রান্না চিংড়ি"},ko:{name:"새우 커리",desc:"코코넛 소스의 탱글탱글한 새우"}},
+  // Snacks
+  {id:8,emoji:"🥟",cat:"snacks",price:6000,en:{name:"Chicken Samosa (4pc)",desc:"Crispy pastry filled with spiced chicken"},bn:{name:"চিকেন সামুচা (৪টি)",desc:"মশলাদার মুরগি ভরা কুরকুরে সামুচা"},ko:{name:"치킨 사모사 (4개)",desc:"향신료 닭고기 속이 든 바삭한 튀김"}},
+  {id:9,emoji:"🧅",cat:"snacks",price:5000,en:{name:"Onion Bhaji (6pc)",desc:"Golden fried onion fritters"},bn:{name:"পেঁয়াজু (৬টি)",desc:"সোনালি ভাজা পেঁয়াজের পাকোড়া"},ko:{name:"어니언 바지 (6개)",desc:"황금빛으로 튀긴 양파 튀김"}},
+  {id:10,emoji:"🍗",cat:"snacks",price:9000,en:{name:"Chicken Tikka (6pc)",desc:"Tandoor-marinated chicken pieces"},bn:{name:"চিকেন টিক্কা (৬টি)",desc:"তান্দুরে মেরিনেট করা মুরগির টুকরা"},ko:{name:"치킨 티카 (6개)",desc:"탄두르에 구운 닭고기"}},
+  // Bread
+  {id:11,emoji:"🫓",cat:"bread",price:2500,en:{name:"Garlic Naan",desc:"Soft flatbread with garlic butter"},bn:{name:"গার্লিক নান",desc:"রসুন মাখন দিয়ে নরম নান রুটি"},ko:{name:"갈릭 난",desc:"마늘 버터가 들어간 부드러운 빵"}},
+  {id:12,emoji:"🥙",cat:"bread",price:2000,en:{name:"Plain Naan",desc:"Classic soft baked flatbread"},bn:{name:"সাদা নান",desc:"ক্লাসিক নরম নান রুটি"},ko:{name:"플레인 난",desc:"클래식 부드러운 납작빵"}},
+  {id:13,emoji:"🥞",cat:"bread",price:2000,en:{name:"Paratha",desc:"Layered whole-wheat flatbread"},bn:{name:"পরোটা",desc:"স্তরযুক্ত আটার পরোটা"},ko:{name:"파라타",desc:"통밀로 만든 층층이 쌓인 빵"}},
+  // Drinks
+  {id:14,emoji:"🥭",cat:"drinks",price:4500,en:{name:"Mango Lassi",desc:"Sweet chilled mango yogurt drink"},bn:{name:"ম্যাঙ্গো লাচ্চি",desc:"মিষ্টি ঠান্ডা আমের দই পানীয়"},ko:{name:"망고 라씨",desc:"달콤하고 시원한 망고 요거트 음료"}},
+  {id:15,emoji:"☕",cat:"drinks",price:3000,en:{name:"Masala Chai",desc:"Spiced milk tea, traditionally brewed"},bn:{name:"মশলা চা",desc:"ঐতিহ্যবাহী মশলা দুধ চা"},ko:{name:"마살라 차이",desc:"전통 향신료 밀크티"}},
+  {id:16,emoji:"🍵",cat:"drinks",price:2500,en:{name:"Green Tea",desc:"Light and refreshing green tea"},bn:{name:"গ্রিন টি",desc:"হালকা ও সতেজ গ্রিন টি"},ko:{name:"녹차",desc:"가볍고 상쾌한 녹차"}},
+  // Desserts
+  {id:17,emoji:"🍮",cat:"desserts",price:5500,en:{name:"Gulab Jamun (4pc)",desc:"Soft milk dumplings in rose syrup"},bn:{name:"গোলাপ জামুন (৪টি)",desc:"গোলাপ জলের সিরায় নরম মিষ্টি"},ko:{name:"굴라브 자문 (4개)",desc:"로즈 시럽에 담긴 부드러운 과자"}},
+  {id:18,emoji:"🍨",cat:"desserts",price:5000,en:{name:"Kheer",desc:"Creamy rice pudding with cardamom"},bn:{name:"খির",desc:"এলাচ দিয়ে ক্রিমি চালের পায়েস"},ko:{name:"키르",desc:"카다몸이 들어간 부드러운 쌀 푸딩"}},
+];
+
+const CATS_META = {
+  all:  {en:"All",      bn:"সব",    ko:"전체",  emoji:"🌟"},
+  rice: {en:"Rice",     bn:"ভাত",   ko:"밥류",  emoji:"🍚"},
+  curry:{en:"Curry",    bn:"কারি",  ko:"커리",  emoji:"🍛"},
+  snacks:{en:"Snacks",  bn:"স্ন্যাকস",ko:"간식",emoji:"🥟"},
+  bread:{en:"Bread",    bn:"রুটি",  ko:"빵류",  emoji:"🫓"},
+  drinks:{en:"Drinks",  bn:"পানীয়",ko:"음료",  emoji:"🥤"},
+  desserts:{en:"Desserts",bn:"মিষ্টি",ko:"디저트",emoji:"🍮"},
+};
+
+const CURRENCY = "₩";
+let lang = "en";
+let cart = {};
+let activeCat = "all";
+let searchQuery = "";
+
+function fmt(n){ return CURRENCY + Number(n).toLocaleString(); }
+
+// ─── LANGUAGE ───
+function setLang(l){
+  lang = l;
+  document.getElementById("body").className = l==="bn"?"lang-bn":l==="ko"?"lang-ko":"lang-en";
+  ["lb-en","lb-bn","lb-ko"].forEach(id=>document.getElementById(id).classList.remove("active"));
+  document.getElementById("lb-"+l).classList.add("active");
+  applyTranslations();
+  renderAll();
+}
+
+function applyTranslations(){
+  const t = T[lang];
+  document.getElementById("topbar").textContent = t.topbar;
+  document.getElementById("logo-sub").textContent = t.logo_sub;
+  document.getElementById("hero-badge-txt").textContent = t.hero_badge;
+  document.getElementById("hero-title").innerHTML = t.hero_title;
+  document.getElementById("hero-sub").textContent = t.hero_sub;
+  ["ht1","ht2","ht3","ht4"].forEach(id=>{ document.getElementById(id).textContent = t[id]; });
+  document.getElementById("notice-txt").innerHTML = t.notice_txt;
+  document.getElementById("hdr-cart-txt").textContent = t.hdr_cart;
+  document.getElementById("search-input").placeholder = t.search_ph;
+  document.getElementById("footer-txt").textContent = t.footer_txt;
+  // receipt static labels via data-t
+  document.querySelectorAll("[data-t]").forEach(el=>{
+    const key = el.getAttribute("data-t");
+    if(t[key]) el.textContent = t[key];
+  });
+  // form placeholders
+  const fi = id => document.getElementById(id);
+  if(fi("f-name")) fi("f-name").placeholder = t.ph_name;
+  if(fi("f-phone")) fi("f-phone").placeholder = t.ph_phone;
+  if(fi("f-address")) fi("f-address").placeholder = t.ph_address;
+  if(fi("f-note")) fi("f-note").placeholder = t.ph_note;
+  if(fi("alert-box")) fi("alert-box").innerHTML = "⚠️ " + t.alert_txt;
+}
+
+// ─── RENDER ALL ───
+function renderAll(){ renderCats(); renderProducts(); renderCart(); }
+
+function renderCats(){
+  const t = T[lang];
+  const all_cats = ["all",...Object.keys(CATS_META).filter(k=>k!=="all")];
+  const usedCats = new Set(products.map(p=>p.cat));
+  document.getElementById("cat-tabs").innerHTML = all_cats.filter(c=>c==="all"||usedCats.has(c)).map(c=>{
+    const m = CATS_META[c];
+    const label = m[lang]||m.en;
+    return `<button class="cat-tab ${c===activeCat?"active":""}" onclick="filterCat('${c}')"><span class="emoji">${m.emoji}</span>${label}</button>`;
+  }).join("");
+}
+
+function filterCat(cat){
+  activeCat = cat;
+  searchQuery = "";
+  document.getElementById("search-input").value = "";
+  renderCats();
+  renderProducts();
+}
+
+function searchProducts(q){
+  searchQuery = q.toLowerCase();
+  activeCat = "all";
+  renderCats();
+  renderProducts();
+}
+
+function getFilteredProducts(){
+  let list = products;
+  if(activeCat !== "all") list = list.filter(p=>p.cat===activeCat);
+  if(searchQuery) list = list.filter(p=>{
+    const d = p[lang]||p.en;
+    return d.name.toLowerCase().includes(searchQuery)||d.desc.toLowerCase().includes(searchQuery);
+  });
+  return list;
+}
+
+function renderProducts(){
+  const t = T[lang];
+  const filtered = getFilteredProducts();
+  const m = CATS_META[activeCat];
+  const headLabel = activeCat==="all" ? t.cat_heading : (m[lang]||m.en);
+  document.getElementById("cat-heading").textContent = headLabel;
+  document.getElementById("item-count").textContent = t.item_count_fn(filtered.length);
+
+  if(filtered.length===0){
+    document.getElementById("product-grid").innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--ink3);font-size:.88rem">No items found.</div>`;
+    return;
+  }
+
+  document.getElementById("product-grid").innerHTML = filtered.map(p=>{
+    const d = p[lang]||p.en;
+    const qty = cart[p.id]||0;
+    return `<div class="product-card">
+      <div class="p-img">${p.emoji}<span class="halal-stamp">${t.halal}</span></div>
+      <div class="p-body">
+        <div class="p-name">${d.name}</div>
+        <div class="p-desc">${d.desc}</div>
+        <div class="p-footer">
+          <div class="p-price">${fmt(p.price)}<br><span class="p-unit">/ serving</span></div>
+          ${qty===0
+            ? `<button class="add-btn" onclick="addToCart(${p.id})">+</button>`
+            : `<div class="qty-ctrl">
+                <button class="q-btn" onclick="removeOne(${p.id})">−</button>
+                <span class="q-num">${qty}</span>
+                <button class="q-btn" onclick="addToCart(${p.id})">+</button>
+               </div>`}
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+// ─── CART ACTIONS ───
+function addToCart(id){ cart[id]=(cart[id]||0)+1; renderProducts(); renderCart(); }
+function removeOne(id){ if(cart[id]>1) cart[id]--; else delete cart[id]; renderProducts(); renderCart(); }
+function removeItem(id){ delete cart[id]; renderProducts(); renderCart(); }
+function clearCart(){ cart={}; renderProducts(); renderCart(); }
+
+function renderCart(){
+  const t = T[lang];
+  const entries = Object.entries(cart);
+  const total = entries.reduce((s,[id,q])=>s+products.find(p=>p.id==id).price*q,0);
+  const count = entries.reduce((s,[,q])=>s+q,0);
+
+  // update header badge
+  const badge = document.getElementById("hdr-badge");
+  badge.textContent = count;
+  badge.classList.toggle("hidden", count===0);
+
+  document.getElementById("cart-title").textContent = t.cart_title;
+  document.getElementById("cart-count-label").textContent = t.cart_items_label(count);
+
+  const body = document.getElementById("cart-body");
+  if(entries.length===0){
+    body.innerHTML = `<div class="cart-empty-state"><div class="cart-empty-icon">🛒</div><div class="cart-empty-txt">${t.cart_empty_txt}</div></div>`;
+    return;
+  }
+
+  const rows = entries.map(([id,qty])=>{
+    const p = products.find(x=>x.id==id);
+    const d = p[lang]||p.en;
+    return `<div class="cart-row">
+      <div class="cr-name">${p.emoji} ${d.name}</div>
+      <div class="cr-price">${fmt(p.price*qty)}</div>
+      <div class="cr-meta">${qty} × ${fmt(p.price)}</div>
+      <button class="cr-remove" onclick="removeItem(${id})">${t.remove}</button>
+    </div>`;
+  }).join("");
+
+  body.innerHTML = `
+    <div class="cart-list">${rows}</div>
+    <div class="cart-divider"></div>
+    <div class="cart-subtotal"><span>${t.subtotal}</span><span>${fmt(total)}</span></div>
+    <div class="cart-delivery"><span>${t.delivery}</span><span>${t.free}</span></div>
+    <div class="cart-total-row"><span class="cart-total-label">${t.total_label_cart}</span><span class="cart-total-amount">${fmt(total)}</span></div>
+    <button class="checkout-btn" onclick="goCheckout()">${t.checkout_btn}</button>
+    <button class="clear-btn" onclick="clearCart()">${t.clear_cart}</button>
+  `;
+}
+
+// ─── NAVIGATION ───
+function scrollToCart(){ document.getElementById("cart-panel").scrollIntoView({behavior:"smooth",block:"center"}); }
+
+function goCheckout(){
+  if(Object.keys(cart).length===0) return;
+  buildOrderMini();
+  document.getElementById("alert-box").innerHTML = "⚠️ " + T[lang].alert_txt;
+  document.getElementById("shop-page").classList.add("hidden");
+  document.getElementById("checkout-page").classList.add("show");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function backToShop(){
+  document.getElementById("checkout-page").classList.remove("show");
+  document.getElementById("shop-page").classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function goHome(){
+  document.getElementById("checkout-page").classList.remove("show");
+  document.getElementById("receipt-page").classList.remove("show");
+  document.getElementById("shop-page").classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function buildOrderMini(){
+  const t = T[lang];
+  const entries = Object.entries(cart);
+  const total = entries.reduce((s,[id,q])=>s+products.find(p=>p.id==id).price*q,0);
+  const rows = entries.map(([id,qty])=>{
+    const p = products.find(x=>x.id==id);
+    const d = p[lang]||p.en;
+    return `<div class="order-mini-item"><span>${p.emoji} ${d.name} ×${qty}</span><span>${fmt(p.price*qty)}</span></div>`;
+  }).join("");
+  document.getElementById("order-mini-summary").innerHTML = `
+    <div class="order-mini-title">${t.order_items}</div>
+    ${rows}
+    <div class="order-mini-total"><span>${t.total_label_cart}</span><span>${fmt(total)}</span></div>
+  `;
+}
+
+// ─── GENERATE RECEIPT ───
+function generateReceipt(){
+  const t = T[lang];
+  const name = document.getElementById("f-name").value.trim();
+  const phone = document.getElementById("f-phone").value.trim();
+  const addr = document.getElementById("f-address").value.trim();
+  const note = document.getElementById("f-note").value.trim();
+
+  if(!name||!phone||!addr){ alert(t.err_fill); return; }
+
+  const entries = Object.entries(cart);
+  const total = entries.reduce((s,[id,q])=>s+products.find(p=>p.id==id).price*q,0);
+  const orderId = "AHF-" + Date.now().toString().slice(-8);
+  const orderDate = new Date().toLocaleString(lang==="ko"?"ko-KR":lang==="bn"?"bn-BD":"en-US",{timeZone:"Asia/Seoul"});
+
+  document.getElementById("r-order-id").textContent = orderId + "  |  " + orderDate;
+  document.getElementById("r-customer").innerHTML = `
+    <div class="rc-info-item"><span>${t.rc_name}</span><strong>${name}</strong></div>
+    <div class="rc-info-item"><span>${t.rc_phone}</span><strong>${phone}</strong></div>
+    <div class="rc-info-item" style="grid-column:1/-1"><span>${t.rc_address}</span><strong>${addr}</strong></div>
+    ${note?`<div class="rc-info-item" style="grid-column:1/-1"><span>${t.rc_notes}</span><strong>${note}</strong></div>`:""}
+  `;
+
+  document.getElementById("r-items").innerHTML = entries.map(([id,qty])=>{
+    const p = products.find(x=>x.id==id);
+    const d = p[lang]||p.en;
+    return `<tr><td>${p.emoji} ${d.name}</td><td>${qty}</td><td>${fmt(p.price)}</td><td>${fmt(p.price*qty)}</td></tr>`;
+  }).join("");
+
+  document.getElementById("r-total").textContent = fmt(total);
+  document.getElementById("r-bank-amt").textContent = fmt(total);
+  document.getElementById("send-note").innerHTML = t.send_note;
+  document.getElementById("rc-footer").textContent = t.rc_footer;
+
+  document.getElementById("checkout-page").classList.remove("show");
+  document.getElementById("receipt-page").classList.add("show");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function newOrder(){
+  cart={};
+  ["f-name","f-phone","f-address","f-note"].forEach(id=>{ document.getElementById(id).value=""; });
+  document.getElementById("receipt-page").classList.remove("show");
+  document.getElementById("shop-page").classList.remove("hidden");
+  renderCart(); renderProducts();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+// ─── INIT ───
+applyTranslations();
+renderAll();
+</script>
+</body>
+</html>
